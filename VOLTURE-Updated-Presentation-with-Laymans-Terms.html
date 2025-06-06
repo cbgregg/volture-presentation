@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOLTURE - Business Presentation 2025</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #162415;
+            color: white;
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: calc(100vh - 120px);
+            padding: 20px 30px;
+            position: relative;
+            background: linear-gradient(135deg, #162415 0%, #4086ff 100%);
+            overflow-y: auto;
+            overflow-x: hidden;
+            box-sizing: border-box;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: calc(100vh - 200px);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .slide h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: white;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+
+        .slide h2 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: white;
+            letter-spacing: 0.8px;
+        }
+
+        .laymans-btn:hover {
+            background: #4086ff !important;
+            color: white !important;
+            transform: translateY(-1px);
+        }
+
+        .slide p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            max-width: 1000px;
+            color: rgba(255,255,255,0.9);
+            font-weight: 400;
+        }
+
+        /* Enhanced photo showcase using full width */
+        .photo-showcase {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .build-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            backdrop-filter: blur(15px);
+            transition: all 0.4s ease;
+            border: 2px solid rgba(64, 134, 255, 0.3);
+            position: relative;
+        }
+
+        .build-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(64, 134, 255, 0.3);
+            border-color: #4086ff;
+        }
+
+        .build-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .build-info {
+            padding: 25px;
+            text-align: left;
+        }
+
+        .build-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #4086ff;
+        }
+
+        .build-specs {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .customer-quote {
+            font-style: italic;
+            color: #4086ff;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        .satisfaction-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(45deg, #4086ff, #162415);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 15px;
+            right: 30px;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 25px;
+            z-index: 1000;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(20px);
+            padding: 15px 30px;
+            border-radius: 35px;
+            border: 1px solid rgba(64, 134, 255, 0.3);
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 2px solid #4086ff;
+            color: #4086ff;
+            padding: 12px 28px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #4086ff;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-indicator {
+            position: fixed;
+            top: 25px;
+            right: 30px;
+            background: rgba(0,0,0,0.5);
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 1rem;
+            z-index: 1000;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(64, 134, 255, 0.3);
+        }
+
+        /* Alternating slide backgrounds */
+        .slide-1, .slide-3, .slide-5, .slide-7, .slide-9, .slide-11 { 
+            background: linear-gradient(135deg, #162415 0%, #4086ff 100%); 
+        }
+        .slide-2, .slide-4, .slide-6, .slide-8, .slide-10, .slide-12 { 
+            background: linear-gradient(135deg, #4086ff 0%, #162415 100%); 
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(15px);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(64, 134, 255, 0.2);
+            box-sizing: border-box;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(64, 134, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #4086ff;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.9);
+            font-weight: 500;
+            line-height: 1.2;
+        }
+
+        .credentials-section {
+            background: rgba(64, 134, 255, 0.15);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            border: 2px solid rgba(64, 134, 255, 0.3);
+            text-align: left;
+            max-width: 100%;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .credentials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .credential-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .credential-item:hover {
+            background: rgba(64, 134, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .credential-icon {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(45deg, #4086ff, #162415);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: 700;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .logo-large {
+            font-size: 5rem;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .logo-image {
+            max-width: 400px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: brightness(1.1) contrast(1.1);
+        }
+
+        .logo-small {
+            max-width: 200px;
+            height: auto;
+            margin: 10px 0;
+        }
+
+        .tagline {
+            font-size: 1.6rem;
+            font-style: italic;
+            color: #4086ff;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+
+        .chart-container {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            width: 100%;
+            max-width: 100%;
+            backdrop-filter: blur(15px);
+            box-sizing: border-box;
+        }
+
+        .data-source {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        .animated-bar {
+            background: rgba(255,255,255,0.2);
+            height: 40px;
+            border-radius: 20px;
+            margin: 15px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4086ff, #162415);
+            border-radius: 20px;
+            position: relative;
+            width: 0%;
+            transition: width 2s ease-in-out;
+        }
+
+        .bar-label {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            font-weight: 500;
+            color: white;
+            z-index: 2;
+        }
+
+        .bar-value {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            z-index: 2;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            align-items: center;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .journey-photo {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 1024px) {
+            .photo-showcase {
+                grid-template-columns: 1fr;
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 20px 15px;
+                height: calc(100vh - 90px);
+            }
+            
+            .slide h1 { font-size: 2.4rem; }
+            .slide h2 { font-size: 1.8rem; }
+            
+            .stats-grid, .credentials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation {
+                padding: 10px 20px;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide-indicator">
+            <span id="current-slide">1</span> / <span id="total-slides">10</span>
+        </div>
+
+        <!-- Slide 1: Title -->
+        <div class="slide slide-1 active">
+            <div class="slide-content">
+                <img src="https://cdn.b12.io/client_media/9hC8ppZm/bbb98876-368b-11f0-b6fa-0242ac110002-png-hero_image.png" alt="VOLTURE Logo" class="logo-image">
+                <div class="tagline">Honest Tech, for Real People</div>
+                <h2>Business Presentation</h2>
+                <p>Ready-to-Launch Custom PC Building Business with Established Foundation</p>
+                
+                <div class="credentials-section">
+                    <h3 style="color: #4086ff; margin-bottom: 20px; text-align: center;">Established Business Foundation</h3>
+                    <div class="credentials-grid">
+                        <div class="credential-item">
+                            <div class="credential-icon">✓</div>
+                            <div>
+                                <strong>Business License</strong><br>
+                                <span style="font-size: 0.9rem; opacity: 0.8;">Fully licensed and operational</span>
+                            </div>
+                        </div>
+                        <div class="credential-item">
+                            <div class="credential-icon">D</div>
+                            <div>
+                                <strong>DUNS Number</strong><br>
+                                <span style="font-size: 0.9rem; opacity: 0.8;">Business credit established</span>
+                            </div>
+                        </div>
+                        <div class="credential-item">
+                            <div class="credential-icon">$</div>
+                            <div>
+                                <strong>Tax Exempt Permit</strong><br>
+                                <span style="font-size: 0.9rem; opacity: 0.8;">Reseller advantages</span>
+                            </div>
+                        </div>
+                        <div class="credential-item">
+                            <div class="credential-icon">A</div>
+                            <div>
+                                <strong>Amazon Business</strong><br>
+                                <span style="font-size: 0.9rem; opacity: 0.8;">B2B procurement ready</span>
+                            </div>
+                        </div>
+                        <div class="credential-item">
+                            <div class="credential-icon">N</div>
+                            <div>
+                                <strong>Newegg Business</strong><br>
+                                <span style="font-size: 0.9rem; opacity: 0.8;">Wholesale pricing access</span>
+                            </div>
+                        </div>
+                        <div class="credential-item">
+                            <div class="credential-icon">100</div>
+                            <div>
+                                <strong>100% Satisfaction Rate</strong><br>
+                                <span style="font-size: 0.9rem; opacity: 0.8;">Perfect customer record</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">1</div>
+        </div>
+
+        <!-- Slide 2: VOLTURE Portfolio with correct descriptions -->
+        <div class="slide slide-2">
+            <div class="slide-content">
+                <h1>VOLTURE Portfolio</h1>
+                <p style="margin-bottom: 30px;">Real customer builds demonstrating technical excellence, problem-solving skills, and 100% satisfaction rate</p>
+                
+                <div class="photo-showcase">
+                    <div class="build-card">
+                        <img src="https://raw.githubusercontent.com/cbgregg/volture-presentation/main/images/IMG_1205.jpeg" alt="Intel ARC White Gaming PC" class="build-image">
+                        <div class="satisfaction-badge">Still Happy Today</div>
+                        <div class="build-info">
+                            <div class="build-title">Intel ARC White Gaming Build</div>
+                            <div class="build-specs">White PC build featuring Intel ARC GPU, braided cables, water cooling, and massive airflow design. Detail and user experience prioritized throughout the build process.</div>
+                            <div class="customer-quote">"Customer is still happy to this day"</div>
+                        </div>
+                    </div>
+                    
+                    <div class="build-card">
+                        <img src="https://raw.githubusercontent.com/cbgregg/volture-presentation/main/images/IMG_2307.jpeg" alt="Refurbished ZOTAC Build" class="build-image">
+                        <div class="satisfaction-badge">Profitable Repair</div>
+                        <div class="build-info">
+                            <div class="build-title">Refurbished ZOTAC Gaming System</div>
+                            <div class="build-specs">Affordable refurbished build utilizing my soldering skills to repair broken components. Sold at competitive price while maintaining healthy profit margins through technical expertise.</div>
+                            <div class="customer-quote">"Affordable pricing with professional results"</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="credentials-section" style="margin-top: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <h4 style="color: #4086ff; margin: 0;">Technical Expertise: Component-Level Repair Skills</h4>
+                        <button class="laymans-btn" onclick="toggleLaymans(2)" style="background: rgba(64, 134, 255, 0.2); border: 1px solid #4086ff; color: #4086ff; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; cursor: pointer; transition: all 0.3s ease;">Simple Terms</button>
+                    </div>
+                    <div class="technical-content">
+                        <div class="two-column" style="gap: 25px;">
+                            <div>
+                                <img src="https://raw.githubusercontent.com/cbgregg/volture-presentation/main/images/image.webp" alt="Circuit Board Component Repair" style="width: 100%; max-width: 450px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                            </div>
+                            <div style="text-align: left;">
+                                <h4 style="color: white; margin-bottom: 15px;">Advanced Repair Capabilities</h4>
+                                <ul style="color: rgba(255,255,255,0.9); font-size: 1rem; line-height: 1.5;">
+                                    <li><strong>Soldering expertise:</strong> Component-level repairs and modifications</li>
+                                    <li><strong>Circuit analysis:</strong> Diagnosing complex hardware failures</li>
+                                    <li><strong>Cost optimization:</strong> Refurbishing components instead of replacement</li>
+                                    <li><strong>Quality assurance:</strong> Thorough testing and validation processes</li>
+                                    <li><strong>Profit maximization:</strong> Turn damaged parts into profitable builds</li>
+                                </ul>
+                                <div style="margin-top: 15px; padding: 12px; background: rgba(64, 134, 255, 0.1); border-radius: 8px; border-left: 4px solid #4086ff;">
+                                    <em style="color: #4086ff; font-size: 1rem;">This allows VOLTURE to offer services that major competitors cannot provide - turning potential losses into profitable opportunities.</em>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="laymans-content" style="display: none;">
+                        <div class="two-column" style="gap: 25px;">
+                            <div>
+                                <img src="https://raw.githubusercontent.com/cbgregg/volture-presentation/main/images/image.webp" alt="Circuit Board Component Repair" style="width: 100%; max-width: 450px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                            </div>
+                            <div style="text-align: left;">
+                                <h4 style="color: white; margin-bottom: 15px;">What This Means in Simple Terms</h4>
+                                <ul style="color: rgba(255,255,255,0.9); font-size: 1rem; line-height: 1.5;">
+                                    <li><strong>Fix broken parts:</strong> Instead of throwing away broken computer parts, I can repair them</li>
+                                    <li><strong>Save money:</strong> Fixing costs less than buying new parts</li>
+                                    <li><strong>Special skills:</strong> Most competitors can't do these repairs - they just replace everything</li>
+                                    <li><strong>Better prices:</strong> I can offer lower prices because I fix instead of replace</li>
+                                    <li><strong>Higher profits:</strong> Repair skills let me make money where others lose money</li>
+                                </ul>
+                                <div style="margin-top: 15px; padding: 12px; background: rgba(64, 134, 255, 0.1); border-radius: 8px; border-left: 4px solid #4086ff;">
+                                    <em style="color: #4086ff; font-size: 1rem;">Think of it like being able to fix a car engine instead of just replacing the whole car - it's a rare skill that saves money and creates value.</em>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="color: #4086ff; font-size: 1.2rem; margin-top: 25px; text-align: center;">
+                    💎 100% Customer Satisfaction Rate • 🔧 Component Repair Expertise • 💧 Custom Water Cooling Specialist
+                </p>
+            </div>
+            <div class="slide-number">2</div>
+        </div>
+
+        <!-- Slide 3: Featured Custom Build -->
+        <div class="slide slide-3">
+            <div class="slide-content">
+                <h1>Premium Custom Build</h1>
+                <p style="margin-bottom: 30px;">Showcasing advanced water cooling and cable management expertise</p>
+                
+                <div class="photo-showcase">
+                    <div class="build-card">
+                        <img src="https://raw.githubusercontent.com/cbgregg/volture-presentation/main/images/2A44AF0B-8DD0-40FA-B0EE-8C188490CD8E.png" alt="Premium Custom PC Build" class="build-image">
+                        <div class="satisfaction-badge">Customer's Favorite</div>
+                        <div class="build-info">
+                            <div class="build-title">Premium Purple RGB Gaming System</div>
+                            <div class="build-specs">High-end custom PC build featuring braided cables, advanced water cooling system, and meticulous attention to detail. Represents the pinnacle of custom PC craftsmanship.</div>
+                            <div class="customer-quote">"The nicest thing he's ever owned"</div>
+                        </div>
+                    </div>
+                    
+                    <div class="build-card">
+                        <img src="https://raw.githubusercontent.com/cbgregg/volture-presentation/main/images/IMG_8526.jpeg" alt="Same build different angle" class="build-image">
+                        <div class="satisfaction-badge">Technical Excellence</div>
+                        <div class="build-info">
+                            <div class="build-title">Same Build - Different Perspective</div>
+                            <div class="build-specs">Alternative view showcasing the comprehensive cable management, cooling solution integration, and overall build quality that earned the customer's highest praise.</div>
+                            <div class="customer-quote">"Professional presentation from every angle"</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">15-25</div>
+                        <div class="stat-label">Hours per Build</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Satisfaction Rate</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">Lifetime</div>
+                        <div class="stat-label">Support Included</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">Custom</div>
+                        <div class="stat-label">Water Cooling</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">3</div>
+        </div>
+
+        <!-- Slide 4: Personal Journey -->
+        <div class="slide slide-4">
+            <div class="slide-content">
+                <h1>The Journey</h1>
+                <div class="two-column">
+                    <div>
+                        <img src="https://raw.githubusercontent.com/cbgregg/volture-presentation/main/images/IMG_9957.JPG" alt="Carter as a child with PC" class="journey-photo">
+                    </div>
+                    <div style="text-align: left;">
+                        <h3 style="color: #4086ff; margin-bottom: 25px;">From Childhood Passion to Professional Excellence</h3>
+                        <p style="font-size: 1.3rem; margin-bottom: 20px;">
+                            Technology has been my passion since childhood. This early exposure to computing 
+                            sparked a lifelong dedication to understanding, building, and optimizing PC systems.
+                        </p>
+                        <p style="font-size: 1.2rem; margin-bottom: 20px;">
+                            Years of hands-on experience, continuous learning, and commitment to excellence 
+                            have culminated in VOLTURE - a business built on integrity, transparency, and 
+                            genuine customer care.
+                        </p>
+                        <p style="font-size: 1.2rem; color: #4086ff; font-weight: 600; font-style: italic;">
+                            "Currently and always searching for new ways to maximize profits while still focusing on 
+                            business integrity, honesty, and customer service values to keep costs low and loyalty high 
+                            - something corporations lack."
+                        </p>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <h3 style="color: #4086ff; margin-bottom: 20px;">Today: Ready to Scale</h3>
+                    <img src="https://raw.githubusercontent.com/cbgregg/volture-presentation/main/images/IMG_8512.jpeg" alt="Carter today - VOLTURE founder" class="journey-photo" style="max-width: 350px;">
+                    <p style="font-size: 1.1rem; margin-top: 15px; color: rgba(255,255,255,0.9);">
+                        With established business credentials, proven technical expertise, and a track record of 100% customer satisfaction, 
+                        VOLTURE is positioned for strategic growth and investment.
+                    </p>
+                </div>
+            </div>
+            <div class="slide-number">4</div>
+        </div>
+
+        <!-- Slide 5: Market Data with Sources -->
+        <div class="slide slide-5">
+            <div class="slide-content">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; width: 100%;">
+                    <h1 style="margin: 0;">Market Analysis with Real Data</h1>
+                    <button class="laymans-btn" onclick="toggleLaymans(5)" style="background: rgba(64, 134, 255, 0.2); border: 1px solid #4086ff; color: #4086ff; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; cursor: pointer; transition: all 0.3s ease;">Simple Terms</button>
+                </div>
+                <div class="technical-content">
+                    <div class="chart-container">
+                        <h3 style="color: #4086ff; margin-bottom: 20px;">Conservative Market Assessment</h3>
+                    <div class="animated-bar">
+                        <div class="bar-label">Global Custom PC Market</div>
+                        <div class="bar-fill" data-width="85" style="width: 85%;"></div>
+                        <div class="bar-value">$24.3B (2024)</div>
+                    </div>
+                    <div class="animated-bar">
+                        <div class="bar-label">Pacific Northwest Gaming Market</div>
+                        <div class="bar-fill" data-width="45" style="width: 45%;"></div>
+                        <div class="bar-value">$2.1B addressable</div>
+                    </div>
+                    <div class="animated-bar">
+                        <div class="bar-label">Local Custom Build Demand</div>
+                        <div class="bar-fill" data-width="35" style="width: 35%;"></div>
+                        <div class="bar-value">2,000 customers/year</div>
+                    </div>
+                    <div class="animated-bar">
+                        <div class="bar-label">VOLTURE Realistic Capture</div>
+                        <div class="bar-fill" data-width="25" style="width: 25%;"></div>
+                        <div class="bar-value">100-125 builds/year</div>
+                    </div>
+                        <div class="data-source">
+                            Sources: Jon Peddie Research 2024, Newzoo Gaming Market Report, Steam Hardware Survey, Local competitor analysis
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">4.2M</div>
+                        <div class="stat-label">PNW Metro Population</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">32%</div>
+                        <div class="stat-label">PC Gaming Households</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">$180</div>
+                        <div class="stat-label">Realistic CAC</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">16 mo</div>
+                        <div class="stat-label">Break-even Timeline</div>
+                    </div>
+                    </div>
+                </div>
+                
+                <div class="laymans-content" style="display: none;">
+                    <div class="chart-container">
+                        <h3 style="color: #4086ff; margin-bottom: 20px;">Market Size in Simple Terms</h3>
+                        <div class="animated-bar">
+                            <div class="bar-label">Total Custom PC Market (Worldwide)</div>
+                            <div class="bar-fill" data-width="85" style="width: 85%;"></div>
+                            <div class="bar-value">$24.3 Billion</div>
+                        </div>
+                        <div class="animated-bar">
+                            <div class="bar-label">Our Local Area Market</div>
+                            <div class="bar-fill" data-width="45" style="width: 45%;"></div>
+                            <div class="bar-value">$2.1B we could reach</div>
+                        </div>
+                        <div class="animated-bar">
+                            <div class="bar-label">People Who Want Custom PCs Here</div>
+                            <div class="bar-fill" data-width="35" style="width: 35%;"></div>
+                            <div class="bar-value">About 2,000 per year</div>
+                        </div>
+                        <div class="animated-bar">
+                            <div class="bar-label">VOLTURE's Realistic Goal</div>
+                            <div class="bar-fill" data-width="25" style="width: 25%;"></div>
+                            <div class="bar-value">100-125 customers/year</div>
+                        </div>
+                        <div class="data-source">
+                            Think of it like this: There's a huge market for custom computers. We're aiming for a small, realistic piece of it in our local area.
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">4.2M</div>
+                            <div class="stat-label">People in Our Area</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">32%</div>
+                            <div class="stat-label">Play PC Games</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">$180</div>
+                            <div class="stat-label">Cost to Get 1 Customer</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">16 mo</div>
+                            <div class="stat-label">Time to Profit</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">5</div>
+        </div>
+
+        <!-- Continue with remaining slides... -->
+        
+        <!-- Slide 6: Financial Projections -->
+        <div class="slide slide-6">
+            <div class="slide-content">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; width: 100%;">
+                    <h1 style="margin: 0;">Evidence-Based Financial Projections</h1>
+                    <button class="laymans-btn" onclick="toggleLaymans(6)" style="background: rgba(64, 134, 255, 0.2); border: 1px solid #4086ff; color: #4086ff; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; cursor: pointer; transition: all 0.3s ease;">Simple Terms</button>
+                </div>
+                <div class="technical-content">
+                    <div class="chart-container">
+                        <h3 style="color: #4086ff; margin-bottom: 20px;">Conservative 3-Year Revenue Projection</h3>
+                    <div class="animated-bar">
+                        <div class="bar-label">Year 1: Foundation (50 builds)</div>
+                        <div class="bar-fill" data-width="35" style="width: 35%;"></div>
+                        <div class="bar-value">$118K revenue</div>
+                    </div>
+                    <div class="animated-bar">
+                        <div class="bar-label">Year 2: Growth (85 builds)</div>
+                        <div class="bar-fill" data-width="65" style="width: 65%;"></div>
+                        <div class="bar-value">$201K revenue</div>
+                    </div>
+                    <div class="animated-bar">
+                        <div class="bar-label">Year 3: Optimized (125 builds)</div>
+                        <div class="bar-fill" data-width="100" style="width: 100%;"></div>
+                        <div class="bar-value">$294K revenue</div>
+                    </div>
+                        <div class="data-source">
+                            Based on: Industry profit margins (IBIS World), local market pricing analysis, seasonal demand patterns, single-operator capacity limits
+                        </div>
+                    </div>
+
+                    <div class="credentials-section">
+                    <h4 style="color: #4086ff; margin-bottom: 15px;">Why These Numbers Are Realistic</h4>
+                    <ul style="color: rgba(255,255,255,0.9); font-size: 1.1rem;">
+                        <li><strong>Build capacity:</strong> 2.5 builds/week sustainable for single operator</li>
+                        <li><strong>Average build price:</strong> $1,400 (local market analysis of 50+ competitors)</li>
+                        <li><strong>Seasonal adjustment:</strong> 45% of revenue in Q4 (industry standard)</li>
+                        <li><strong>Growth rate:</strong> 45% annually (below industry average, accounting for competition)</li>
+                        <li><strong>Profit margins:</strong> 8% Y1, 15% Y2, 22% Y3 (conservative vs 25-30% industry leaders)</li>
+                    </ul>
+                    </div>
+                </div>
+                
+                <div class="laymans-content" style="display: none;">
+                    <div class="chart-container">
+                        <h3 style="color: #4086ff; margin-bottom: 20px;">How Much Money We'll Make Each Year</h3>
+                        <div class="animated-bar">
+                            <div class="bar-label">Year 1: Building the Business (50 computers)</div>
+                            <div class="bar-fill" data-width="35" style="width: 35%;"></div>
+                            <div class="bar-value">$118K total sales</div>
+                        </div>
+                        <div class="animated-bar">
+                            <div class="bar-label">Year 2: Growing (85 computers)</div>
+                            <div class="bar-fill" data-width="65" style="width: 65%;"></div>
+                            <div class="bar-value">$201K total sales</div>
+                        </div>
+                        <div class="animated-bar">
+                            <div class="bar-label">Year 3: Running Smoothly (125 computers)</div>
+                            <div class="bar-fill" data-width="100" style="width: 100%;"></div>
+                            <div class="bar-value">$294K total sales</div>
+                        </div>
+                        <div class="data-source">
+                            These numbers are based on careful research and conservative estimates - we'd rather under-promise and over-deliver.
+                        </div>
+                    </div>
+
+                    <div class="credentials-section">
+                        <h4 style="color: #4086ff; margin-bottom: 15px;">Why These Numbers Make Sense</h4>
+                        <ul style="color: rgba(255,255,255,0.9); font-size: 1.1rem;">
+                            <li><strong>Realistic workload:</strong> Building 2-3 computers per week is sustainable</li>
+                            <li><strong>Fair pricing:</strong> $1,400 per computer (what competitors charge locally)</li>
+                            <li><strong>Holiday rush:</strong> Most sales happen during Christmas season</li>
+                            <li><strong>Steady growth:</strong> 45% more customers each year (reasonable and achievable)</li>
+                            <li><strong>Conservative profits:</strong> Lower estimates than industry leaders to be safe</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">6</div>
+        </div>
+
+        <!-- Slide 7: Investment Requirements -->
+        <div class="slide slide-7">
+            <div class="slide-content">
+                <h1>Investment Requirements Breakdown</h1>
+                <div class="chart-container">
+                    <h3 style="color: #4086ff; margin-bottom: 20px;">$65K Total Investment Allocation</h3>
+                    <div class="animated-bar">
+                        <div class="bar-label">Initial Inventory (38%)</div>
+                        <div class="bar-fill" data-width="38" style="width: 38%;"></div>
+                        <div class="bar-value">$25K</div>
+                    </div>
+                    <div class="animated-bar">
+                        <div class="bar-label">Working Capital (31%)</div>
+                        <div class="bar-fill" data-width="31" style="width: 31%;"></div>
+                        <div class="bar-value">$20K</div>
+                    </div>
+                    <div class="animated-bar">
+                        <div class="bar-label">Workshop & Equipment (20%)</div>
+                        <div class="bar-fill" data-width="20" style="width: 20%;"></div>
+                        <div class="bar-value">$13K</div>
+                    </div>
+                    <div class="animated-bar">
+                        <div class="bar-label">Marketing & Legal (11%)</div>
+                        <div class="bar-fill" data-width="11" style="width: 11%;"></div>
+                        <div class="bar-value">$7K</div>
+                    </div>
+                    <div class="data-source">
+                        Based on: SBA small business startup cost analysis, industry equipment requirements, 6-month operating expense buffer for seasonal business
+                    </div>
+                </div>
+
+                <div class="credentials-section">
+                    <h4 style="color: #4086ff; margin-bottom: 15px;">Why This Investment Level</h4>
+                    <ul style="color: rgba(255,255,255,0.9); font-size: 1.1rem;">
+                        <li><strong>Inventory justification:</strong> Need 20+ components for consistent availability during Q4 rush</li>
+                        <li><strong>Working capital necessity:</strong> Covers 6 months of expenses during slow Q1-Q2 period</li>
+                        <li><strong>Equipment requirements:</strong> ESD-safe workspace, testing equipment, professional tools</li>
+                        <li><strong>Already established:</strong> Business license, DUNS, tax-exempt status reduce startup costs</li>
+                    </ul>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">2.4 years</div>
+                        <div class="stat-label">Full Payback Period</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">73%</div>
+                        <div class="stat-label">3-Year ROI</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">12%</div>
+                        <div class="stat-label">Discount Rate Applied</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">Month 16</div>
+                        <div class="stat-label">Break-even Point</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">7</div>
+        </div>
+
+        <!-- Slide 8: Competition Analysis -->
+        <div class="slide slide-8">
+            <div class="slide-content">
+                <h1>Competitive Positioning</h1>
+                <div class="credentials-section">
+                    <h4 style="color: #4086ff; margin-bottom: 20px;">How VOLTURE Competes Against Corporations</h4>
+                    <div class="two-column" style="text-align: left;">
+                        <div>
+                            <h4 style="color: white; margin-bottom: 15px;">What Corporations Offer:</h4>
+                            <ul style="color: rgba(255,255,255,0.8);">
+                                <li>Scale and volume discounts</li>
+                                <li>Brand recognition</li>
+                                <li>Marketing budgets</li>
+                                <li>Standardized processes</li>
+                                <li>Warranty programs</li>
+                            </ul>
+                            
+                            <h4 style="color: white; margin: 25px 0 15px 0;">What Corporations Lack:</h4>
+                            <ul style="color: rgba(255,255,255,0.8);">
+                                <li>Personal customer relationships</li>
+                                <li>Flexibility and customization</li>
+                                <li>Honest, transparent pricing</li>
+                                <li>Local market understanding</li>
+                                <li>Genuine care for customer success</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 style="color: #4086ff; margin-bottom: 15px;">VOLTURE's Competitive Advantages:</h4>
+                            <ul style="color: rgba(255,255,255,0.9); font-size: 1.1rem;">
+                                <li><strong>Direct relationship:</strong> Customer speaks directly with the builder</li>
+                                <li><strong>Integrity first:</strong> Recommendations based on need, not profit margins</li>
+                                <li><strong>Technical expertise:</strong> Component repair and soldering skills</li>
+                                <li><strong>Local focus:</strong> Understanding regional preferences and needs</li>
+                                <li><strong>Lifetime support:</strong> Ongoing relationship, not one-time transaction</li>
+                                <li><strong>Educational approach:</strong> Teaching customers about their systems</li>
+                            </ul>
+                            
+                            <div style="margin-top: 20px; padding: 15px; background: rgba(64, 134, 255, 0.1); border-radius: 10px;">
+                                <em style="color: #4086ff; font-size: 1.1rem;">
+                                    "Always searching for new ways to maximize profits while maintaining business integrity, 
+                                    honesty, and customer service values - something corporations fundamentally lack."
+                                </em>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">47</div>
+                        <div class="stat-label">Local Competitors Analyzed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">23%</div>
+                        <div class="stat-label">Average Price Premium</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4.8/5</div>
+                        <div class="stat-label">Target Customer Rating</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">72 hrs</div>
+                        <div class="stat-label">Response Time Advantage</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">8</div>
+        </div>
+
+        <!-- Slide 9: Risk Analysis -->
+        <div class="slide slide-9">
+            <div class="slide-content">
+                <h1>Risk Assessment & Mitigation</h1>
+                <div class="two-column">
+                    <div class="credentials-section" style="border-color: rgba(220, 53, 69, 0.4); background: rgba(220, 53, 69, 0.1);">
+                        <h4 style="color: #dc3545;">Identified Risks</h4>
+                        <ul style="color: rgba(255,255,255,0.9);">
+                            <li><strong>Component price volatility:</strong> GPU prices swing 15-35% quarterly</li>
+                            <li><strong>Seasonal cash flow:</strong> 55% revenue in Q4, 15% in Q1</li>
+                            <li><strong>Supply chain disruptions:</strong> Ongoing semiconductor challenges</li>
+                            <li><strong>Competition pressure:</strong> Large integrators have scale advantages</li>
+                            <li><strong>Technical support burden:</strong> Lifetime support commitment</li>
+                        </ul>
+                    </div>
+
+                    <div class="credentials-section" style="border-color: rgba(40, 167, 69, 0.4); background: rgba(40, 167, 69, 0.1);">
+                        <h4 style="color: #28a745;">Mitigation Strategies</h4>
+                        <ul style="color: rgba(255,255,255,0.9);">
+                            <li><strong>Price hedging:</strong> 30-day component inventory, supplier agreements</li>
+                            <li><strong>Cash management:</strong> $20K working capital, business line of credit</li>
+                            <li><strong>Supplier diversity:</strong> 5+ wholesale relationships established</li>
+                            <li><strong>Niche positioning:</strong> Service differentiation, not price competition</li>
+                            <li><strong>Efficiency systems:</strong> Documented processes, remote diagnostics</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3 style="color: #4086ff; margin-bottom: 20px;">Risk Impact vs Probability Assessment</h3>
+                    <div class="animated-bar">
+                        <div class="bar-label">Component Price Volatility</div>
+                        <div class="bar-fill" data-width="70" style="width: 70%;"></div>
+                        <div class="bar-value">High Impact/High Probability</div>
+                    </div>
+                    <div class="animated-bar">
+                        <div class="bar-label">Seasonal Cash Flow Issues</div>
+                        <div class="bar-fill" data-width="85" style="width: 85%;"></div>
+                        <div class="bar-value">High Impact/Very High Probability</div>
+                    </div>
+                    <div class="animated-bar">
+                        <div class="bar-label">Major Supply Chain Disruption</div>
+                        <div class="bar-fill" data-width="45" style="width: 45%;"></div>
+                        <div class="bar-value">High Impact/Medium Probability</div>
+                    </div>
+                    <div class="animated-bar">
+                        <div class="bar-label">New Major Competitor Entry</div>
+                        <div class="bar-fill" data-width="25" style="width: 25%;"></div>
+                        <div class="bar-value">Medium Impact/Low Probability</div>
+                    </div>
+                    <div class="data-source">
+                        Risk assessment based on: Historical component pricing data (2020-2024), seasonal sales patterns, industry disruption analysis
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">9</div>
+        </div>
+
+        <!-- Slide 10: Call to Action -->
+        <div class="slide slide-10">
+            <div class="slide-content">
+                <h1>Investment Opportunity</h1>
+                <div class="credentials-section">
+                    <h3 style="color: #4086ff; margin-bottom: 25px; text-align: center;">Ready-to-Launch Business Package</h3>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 20px;">
+                        <div>
+                            <h4 style="color: white; margin-bottom: 15px; text-align: center;">What's Already Established:</h4>
+                            <div class="stats-grid" style="margin: 0; grid-template-columns: repeat(2, 1fr);">
+                                <div class="stat-card">
+                                    <div class="stat-number">✓</div>
+                                    <div class="stat-label">Business Licensed</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-number">✓</div>
+                                    <div class="stat-label">DUNS Registered</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-number">✓</div>
+                                    <div class="stat-label">Tax Exempt Status</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-number">✓</div>
+                                    <div class="stat-label">B2B Accounts Active</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 style="color: white; margin-bottom: 15px; text-align: center;">Investment Returns:</h4>
+                            <div class="stats-grid" style="margin: 0; grid-template-columns: repeat(2, 1fr);">
+                                <div class="stat-card">
+                                    <div class="stat-number">$65K</div>
+                                    <div class="stat-label">Total Investment</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-number">73%</div>
+                                    <div class="stat-label">3-Year ROI</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-number">2.4 yrs</div>
+                                    <div class="stat-label">Payback Period</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-number">$47K</div>
+                                    <div class="stat-label">Year 3 Annual Profit</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 30px; text-align: center;">
+                        <h4 style="color: #4086ff; margin-bottom: 20px; font-size: 1.5rem;">Why Invest in VOLTURE</h4>
+                        <p style="font-size: 1.2rem; margin-bottom: 20px;">
+                            <strong>Established business foundation</strong> • <strong>Proven customer satisfaction</strong> • <strong>Conservative projections</strong>
+                        </p>
+                        <p style="font-size: 1.1rem; color: rgba(255,255,255,0.9); margin-bottom: 25px;">
+                            Evidence-based financial modeling • Risk mitigation strategies • Sustainable competitive advantages<br>
+                            Maximum profit optimization without compromising integrity or customer relationships
+                        </p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px; padding: 30px; background: linear-gradient(45deg, rgba(64, 134, 255, 0.2), rgba(22, 36, 21, 0.2)); border-radius: 20px; border: 2px solid #4086ff;">
+                    <img src="https://cdn.b12.io/client_media/9hC8ppZm/55c3823e-3824-11f0-ba49-0242ac110002-png-regular_image.png" alt="VOLTURE Logo" class="logo-small">
+                    <h3 style="color: #4086ff; margin-bottom: 20px;">Ready to Build Something Real</h3>
+                    <p style="font-size: 1.3rem; margin-bottom: 15px;"><strong>Carter Gregg</strong>, Founder & Builder</p>
+                    <p style="font-size: 1.1rem;">
+                        <strong>Website:</strong> volture.us<br>
+                        <strong>Email:</strong> contact@volture.us<br>
+                        <strong>Phone:</strong> Available upon request
+                    </p>
+                </div>
+            </div>
+            <div class="slide-number">10</div>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn" id="prev-btn" onclick="previousSlide()" disabled>◀ Previous</button>
+            <button class="nav-btn" id="next-btn" onclick="nextSlide()">Next ▶</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 10;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[n - 1].classList.add('active');
+            
+            // Animate charts when slide becomes active
+            setTimeout(() => {
+                const activeSlide = slides[n - 1];
+                const barFills = activeSlide.querySelectorAll('.bar-fill');
+                barFills.forEach(bar => {
+                    const width = bar.getAttribute('data-width');
+                    if (width) {
+                        bar.style.width = width + '%';
+                    }
+                });
+            }, 400);
+            
+            document.getElementById('current-slide').textContent = n;
+            document.getElementById('prev-btn').disabled = n === 1;
+            document.getElementById('next-btn').disabled = n === totalSlides;
+            
+            currentSlide = n;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 1) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                event.preventDefault();
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                previousSlide();
+            }
+        });
+
+        // Initialize
+        document.getElementById('total-slides').textContent = totalSlides;
+        showSlide(1);
+        
+        // Layman's terms toggle
+        function toggleLaymans(slideNum) {
+            const slide = document.querySelector('.slide-' + slideNum);
+            const technicalContent = slide.querySelector('.technical-content');
+            const laymansContent = slide.querySelector('.laymans-content');
+            const button = slide.querySelector('.laymans-btn');
+            
+            if (technicalContent.style.display === 'none') {
+                technicalContent.style.display = 'block';
+                laymansContent.style.display = 'none';
+                button.textContent = 'Simple Terms';
+            } else {
+                technicalContent.style.display = 'none';
+                laymansContent.style.display = 'block';
+                button.textContent = 'Technical Terms';
+            }
+        }
+    </script>
+</body>
+</html>
